@@ -30,12 +30,6 @@ Parameters:
   IamPolicyDocument:
     Type: String
     Description: The IAM policy to be associated with the launched workstation
-  VPC:
-    Description: The VPC in which the EC2 instance will reside
-    Type: AWS::EC2::VPC::Id
-  Subnet:
-    Description: The VPC subnet in which the EC2 instance will reside
-    Type: AWS::EC2::Subnet::Id
   EnvironmentInstanceFiles:
     Type: String
     Description: >-
