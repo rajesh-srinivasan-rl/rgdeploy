@@ -78,7 +78,7 @@ Fore more details on requesting a certificate, follow this [link](https://docs.a
 
 *10.Set up Route 53 for your domain/sub-domain*
 
-From the AWS Console, select Route 53 service. Create a hosted zone for your domain. If you are using an existing domain you can add a CNAME record and select the public DNS name of the ALB as the value. It is also possible to create a separate hosted zone for the sub-domain used for Research Gateway.
+From the AWS Console, select Route 53 service. [Create a hosted zone for your domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingNewSubdomain.html). If you are using an existing domain you can add a CNAME record and select the public DNS name of the ALB as the value. It is also possible to create a separate hosted zone for the sub-domain used for Research Gateway.
 
 *Note* - It is possible to use Research Gateway without a domain-name but we do not recommend that for product workloads. To do so, use the public DNS name of the ALB as the URL of the Research Gateway in the setup scripts.
 
