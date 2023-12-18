@@ -20,6 +20,10 @@ Parameters:
     Description: >-
       An S3 URI (starting with "s3://") that specifies the location of files to be copied to
       the environment instance, including any bootstrap scripts
+  EBSVolumeSize:
+    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Type: Number
+    Default: 8     
   InstanceType:
     Description: Choose the instance type for this instance. e.g. t3.small
     Type: String
@@ -139,6 +143,11 @@ Resources:
       ImageId: !Ref 'LatestAmiId'
       IamInstanceProfile: !Ref InstanceProfile
       PropagateTagsToVolumeOnCreation: true
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
       Tags:
         - Key: Name
           Value: !Join ['-', [Ref: Namespace, 'ec2-linux']]
