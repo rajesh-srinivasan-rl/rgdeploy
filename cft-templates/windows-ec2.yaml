@@ -30,6 +30,10 @@ Parameters:
   LatestAmiId:
     Type:  'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
     Default: '/aws/service/ami-windows-latest/Windows_Server-2019-English-Deep-Learning'
+  EBSVolumeSize:
+    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Type: Number
+    Default: 8   
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
@@ -40,6 +44,11 @@ Resources:
       SecurityGroups: [!Ref 'InstanceSecurityGroup']
       KeyName: !Ref 'KeyPair'
       ImageId: !Ref 'LatestAmiId'
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
       Tags:
         - Key: Name
           Value: !Join ['-', [Ref: AWS::StackName, 'windows-server']]

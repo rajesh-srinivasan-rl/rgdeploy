@@ -17,12 +17,14 @@ Parameters:
     Description: >-
       An S3 URI (starting with "s3://") that specifies the location of files to be copied to
       the environment instance, including any bootstrap scripts
+  EBSVolumeSize:
+    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Type: Number
+    Default: 8     
   InstanceType:
     Type: String
     Description: Instance type for RStudio. Default is t3.medium.
     AllowedValues:
-      - t2.medium
-      - t2.large
       - t3.medium
       - t3.large
       
@@ -105,10 +107,17 @@ Resources:
             - config2
         config1:
           files:         
+            '/root/mount_study.sh':
+              mode: '000755'
+              owner: 'root'
+              group: 'root'
+              content: !Sub |
+                #!/bin/sh
+                su - ${InitialUser} -c "env PATH=$PATH:/usr/local/bin mount_s3.sh" 2>&1 >> /root/mount_s3.log          
             '/root/set_user_token.sh':
               mode: '000755'
-              owner: 'ec2-user'
-              group: 'ec2-user'
+              owner: 'root'
+              group: 'root'
               content: !Sub |
                 #!/usr/bin/env bash
                 instance_id=$(curl -s "http://169.254.169.254/latest/meta-data/instance-id")
@@ -131,6 +140,9 @@ Resources:
 
         config2:
           commands:
+            01_mount_study:
+              cwd: '/root'
+              command: '/root/mount_study.sh'          
             02_set_user_token:
               cwd: '/root'
               command: '/root/set_user_token.sh'
@@ -142,6 +154,11 @@ Resources:
       KeyName: !Ref 'KeyPair'
       IamInstanceProfile: !Ref InstanceProfile
       PropagateTagsToVolumeOnCreation: true
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
       Tags:
         - Key: Name
           Value: !Join ['-', [Ref: Namespace, 'rstudio-server']]
@@ -168,6 +185,7 @@ Resources:
           
           # Add command to start on reboot
           crontab -l 2>/dev/null > "/tmp/crontab"
+          echo '@reboot su - ${InitialUser} -c "env PATH=$PATH:/usr/local/bin mount_s3.sh" 2>&1 >> /root/mount_s3.log' >> "/tmp/crontab"
           echo '@reboot /root/set_user_token.sh 2>&1 >> /var/log/set_user_token.log' >> "/tmp/crontab"
           crontab "/tmp/crontab"
 

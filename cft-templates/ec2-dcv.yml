@@ -299,6 +299,7 @@ Resources:
         - DeviceName: /dev/xvda
           Ebs:
             VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
             
       
 
