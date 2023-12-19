@@ -1394,7 +1394,7 @@
                 },
                 {
                         "Key" : "DetailsLink",
-                        "Value" : "https://aws.amazon.com/hpc/dcv/"
+                        "Value" : "https://researchgateway.readthedocs.io/en/latest/SecureResearchLinuxDesktop.html"
                 },
                 {
                         "Key" : "Service",
@@ -1475,7 +1475,7 @@
                                                 "us-east-2" : "ami-0dee29a828867a412"
                                         },
                                         {
-                                                "us-east-1" : "ami-0b5fdc4291f61615f"
+                                                "us-east-1" : "ami-011ebe24258e615ba"
                                         },
                                         {
                                                 "us-west-2" : "ami-0ac56f9f8b19a73bf"
@@ -1508,6 +1508,137 @@
                 },
                 "cost_resource" : true
         }
+},
+{
+  "_id": {
+    "$oid": "60504955135663522b880dce"
+  },
+  "name" : "Windows Desktop For Secure Research",
+  "description" : "A secure research windows based environment intended to allow researchers to access sensitive data under a higher level of control and data protection.",
+  "fileName" : "ec2-winsecure-desktop.yml",
+  "tags" : [ 
+      {
+          "Key" : "EstimatedTimeToProvision",
+          "Value" : "5 Minutes"
+      }, 
+      {
+          "Key" : "DetailsLink",
+          "Value" : "https://researchgateway.readthedocs.io/en/latest/SecureResearchEnvironment.html"
+      }, 
+      {
+          "Key" : "Service",
+          "Value" : "EC2-SECURE-DESKTOP"
+      }, 
+      {
+          "Key" : "TypeOfProduct",
+          "Value" : "Secure"
+      }, 
+      {
+          "Key" : "ALB",
+          "Value" : "true"
+      }, 
+      {
+          "Key" : "ApplicationPort",
+          "Value" : "8443"
+      }, 
+      {
+          "Key" : "ApplicationProtocol",
+          "Value" : "HTTPS"
+      }
+  ],
+  "owner" : "RL",
+  "portfolio" : "RGPortfolio",
+  "availableRegions" : [],
+  "assignedOU" : [],
+  "metaData" : {
+      "pre_provisioning" : [ 
+          {
+              "code" : "CFT_PARAMS",
+              "params" : [ 
+                  {
+                      "name" : "EnvironmentInstanceFiles",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "IamPolicyDocument",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "ALBSecurityGroup",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "S3Mounts",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "WorkSpaceSecurityGroup",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "Subnet",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "VPC",
+                      "type" : "RL::SC::PARAM::HD"
+                  }, 
+                  {
+                      "name" : "Namespace",
+                      "type" : "RL::SC::PARAM::HD"
+                  }
+              ]
+          }
+      ],
+      "post_provisioning" : [],
+      "checks_before_assigning_product" : [ 
+          {
+              "Key" : "Secure",
+              "Value" : true
+          }, 
+          {
+              "code" : "AMI_ID_REQUIRED",
+              "is_ami_required" : true,
+              "ami_id_list" : [ 
+                  {
+                      "us-east-2" : "ami-08ff5d8cce7cb8abd"
+                  }, 
+                  {
+                      "us-east-1" : "ami-02dea6f1818cd4d45"
+                  }, 
+                  {
+                      "us-west-2" : "ami-08ff5d8cce7cb8abd"
+                  }, 
+                  {
+                      "us-west-1" : "ami-0e0231a98d0ca2679"
+                  }, 
+                  {
+                      "ap-south-1" : "ami-0f81ea31ecefeba4f"
+                  }, 
+                  {
+                      "ap-southeast-1" : "ami-0310a1b62ff9600ce"
+                  }, 
+                  {
+                      "ap-southeast-2" : "ami-03a848fa192a4342a"
+                  }, 
+                  {
+                      "ap-east-1" : "ami-01819f556745b5d1d"
+                  }, 
+                  {
+                      "eu-west-1" : "ami-03dab069555190662"
+                  }, 
+                  {
+                      "eu-west-2" : "ami-0c0e9842ff90e2c95"
+                  }
+              ],
+              "ami_path" : "/RL/RG/StandardCatalog/windows-nice-dcv-ami"
+          }
+      ],
+      "checks_after_assigning_product" : [],
+      "permission_required" : {},
+      "cost_resource" : true
+  }
 }
+
 
 ]
