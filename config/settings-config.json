@@ -1101,10 +1101,14 @@
       },
       "external": {
         "action": [
-            {
-                "action": "Delete",
-                "imageUrl": "../../assets/images/delete@2x.png"
-            }
+          {
+            "action": "Edit",
+            "imageUrl": "../../assets/images/editStudy.png"
+          },
+          {
+            "action": "Delete",
+            "imageUrl": "../../assets/images/delete@2x.png"
+          }
         ]
       },
       "Personal": {

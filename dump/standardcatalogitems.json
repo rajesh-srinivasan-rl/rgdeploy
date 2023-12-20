@@ -823,7 +823,7 @@
       },
       {
         "Key": "DetailsLink",
-        "Value": "https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html"
+        "Value": "https://researchgateway.readthedocs.io/en/latest/FSxForLustre.html"
       },
       {
         "Key": "Service",
@@ -879,7 +879,7 @@
                 },
                 {
                         "Key" : "DetailsLink",
-                        "Value" : "https://aws.amazon.com/hpc/dcv/"
+                        "Value" : "https://researchgateway.readthedocs.io/en/latest/NiceDCV.html"
                 },
                 {
                         "Key" : "Service",
@@ -990,7 +990,7 @@
                   },
                   {
                           "Key" : "DetailsLink",
-                          "Value" : "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
+                          "Value" : "https://researchgateway.readthedocs.io/en/latest/AmazonEFS.html"
                   },
                   {
                           "Key" : "Service",
@@ -1048,7 +1048,7 @@
             },
             {
                     "Key" : "DetailsLink",
-                    "Value" : "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes.html"
+                    "Value" : "https://researchgateway.readthedocs.io/en/latest/EBS.html"
             },
             {
                     "Key" : "Service",
@@ -1108,7 +1108,7 @@
           }, 
           {
               "Key" : "DetailsLink",
-              "Value" : "https://code.visualstudio.com/docs"
+              "Value" : "https://researchgateway.readthedocs.io/en/latest/VSCode.html"
           }, 
           {
               "Key" : "Service",
@@ -1214,7 +1214,7 @@
           }, 
           {
               "Key" : "DetailsLink",
-              "Value" : "https://jupyterlab.readthedocs.io/en/latest/"
+              "Value" : "https://researchgateway.readthedocs.io/en/latest/JupyterLab.html"
           }, 
           {
               "Key" : "Service",
@@ -1320,7 +1320,7 @@
                 },
                 {
                         "Key" : "DetailsLink",
-                        "Value" : "https://software.broadinstitute.org/software/igv/home"
+                        "Value" : "https://researchgateway.readthedocs.io/en/latest/IGV.html"
                 },
                 {
                         "Key" : "Service",
