@@ -80,10 +80,10 @@ Parameters:
     Description: The maximum percentage of On-Demand pricing you want to pay for Spot resources. You will always pay the lowest Spot market price and never more than your maximum percentage.
     Default: 100
   InstanceType:
-    Description: Head Node EC2 instance type
+    Description: Head Node EC2 instance type.Choose the instance type e.g t3.small (2vCPU , 2GiB RAM) t3.medium (2vCPU , 4GiB RAM), t3.large (2vCPU, 8GiB RAM).
     Type: String
     Default: t3.small
-    AllowedValues: [t3.nano, t3.micro, t3.small, t3.medium]
+    AllowedValues: [t3.small, t3.medium, t3.large]
     ConstraintDescription: Must be a valid EC2 instance type.
   WorkerNodeInstanceType:
     Description: Specify the instance types to be used to carry out the computation. You can specify one or more family or instance type. The option 'optimal' chooses the best fit of M4, C4, and R4 instance types available in the region.

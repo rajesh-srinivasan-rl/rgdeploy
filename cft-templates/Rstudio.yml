@@ -23,11 +23,11 @@ Parameters:
     Default: 8     
   InstanceType:
     Type: String
-    Description: Instance type for RStudio. Default is t3.medium.
+    Description: Choose the instance type e.g t3.medium (2vCPU , 2GiB RAM), t3.large (2vCPU, 8GiB RAM), t3.xlarge(4vCPU, 16GiB RAM)
     AllowedValues:
       - t3.medium
-      - t3.large
-      
+      - t3.large 
+      - t3.xlarge    
     ConstraintDescription: Valid instance type in the t3 families
     Default: t3.medium
   InitialUser:

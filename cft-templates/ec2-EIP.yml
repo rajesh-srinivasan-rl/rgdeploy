@@ -21,10 +21,10 @@ Parameters:
       An S3 URI (starting with "s3://") that specifies the location of files to be copied to
       the environment instance, including any bootstrap scripts
   InstanceType:
-    Description: Choose the instance type for this instance. e.g. t3.small
+    Description: Choose the instance type e.g t3.small (2vCPU , 2GiB RAM) t3.medium (2vCPU , 4GiB RAM), t3.large (2vCPU, 8GiB RAM).
     Type: String
     Default: t3.small
-    AllowedValues: [t3.nano, t3.micro, t3.small, t3.medium]
+    AllowedValues: [t3.small, t3.medium, t3.large]
     ConstraintDescription: must be a valid EC2 instance type.
   EBSVolumeSize:
     Description: The initial size of the volume (in GBs)  EBS will use for storage.

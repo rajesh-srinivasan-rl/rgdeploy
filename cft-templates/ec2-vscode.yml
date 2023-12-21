@@ -18,17 +18,16 @@ Parameters:
       An S3 URI (starting with "s3://") that specifies the location of files to be copied to
       the environment instance, including any bootstrap scripts
   EBSVolumeSize:
-    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Description: The initial size of the volume (in GBs), Select volume size must be 32 or above.
     Type: Number
-    Default: 8     
+    Default: 32    
   InstanceType:
     Type: String
-    Description: Instance type for VS-Code. Default is t3.medium.
+    Description: Choose the instance type e.g t3.medium (2vCPU , 2GiB RAM), t3.large (2vCPU, 8GiB RAM), t3.xlarge(4vCPU, 16GiB RAM)
     AllowedValues:
-      - t2.medium
-      - t2.large
       - t3.medium
-      - t3.large      
+      - t3.large 
+      - t3.xlarge    
     ConstraintDescription: Valid instance type in the t3 families
     Default: t3.medium
   ContainerName:
