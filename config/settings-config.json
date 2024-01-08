@@ -586,6 +586,11 @@
                 {
                     "action": "Start",
                     "imageUrl": "../../assets/images/play@2x.png"
+                },
+                {
+                  "action":"Instance Type",
+                  "imageUrl": "../../assets/images/pencil.png",
+                  "outputsRequired": ["InstanceId"]
                 }
             ]
         },
@@ -804,6 +809,11 @@
                 {
                     "action": "Start",
                     "imageUrl": "../../assets/images/play@2x.png"
+                },
+                {
+                  "action":"Instance Type",
+                  "imageUrl": "../../assets/images/pencil.png",
+                  "outputsRequired": ["InstanceId"]
                 }
             ]
         },
@@ -1101,10 +1111,14 @@
       },
       "external": {
         "action": [
-            {
-                "action": "Delete",
-                "imageUrl": "../../assets/images/delete@2x.png"
-            }
+          {
+            "action": "Edit",
+            "imageUrl": "../../assets/images/editStudy.png"
+          },
+          {
+            "action": "Delete",
+            "imageUrl": "../../assets/images/delete@2x.png"
+          }
         ]
       },
       "Personal": {

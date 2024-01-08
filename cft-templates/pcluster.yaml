@@ -44,16 +44,17 @@ Metadata:
 Parameters:
   InstanceType:
     Type: String
-    Description: Instance type for pcluster. Default is t2.micro.
+    Description: Choose the instance type e.g t3.micro(2vCPU , 1GiB RAM), t3.small (2vCPU , 2GiB RAM) t3.medium (2vCPU , 4GiB RAM)
     AllowedValues:
-      - t2.micro
-      - t2.small
-      - t2.medium
-      - t2.large
       - t3.micro
-      - t3.small      
+      - t3.small
+      - t3.medium     
     Description: The instance type to be used for the launcher node
     Default: t3.micro
+  EBSVolumeSize:
+    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Type: Number
+    Default: 8  
   KeyPair: 
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance. If no key pairs exist, please create one from the button next to the dropdown. Please contact your Administrator if you are unable to create one.
     Type: "AWS::EC2::KeyPair::KeyName"
@@ -279,6 +280,11 @@ Resources :
         InstanceType: !Ref InstanceType
         SecurityGroups: [!Ref 'InstanceSecurityGroup']
         PropagateTagsToVolumeOnCreation: true
+        BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
         IamInstanceProfile:
           Ref: GatewayInstanceProfile
         Tags:
