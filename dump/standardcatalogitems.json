@@ -1519,11 +1519,11 @@
   "tags" : [ 
       {
           "Key" : "EstimatedTimeToProvision",
-          "Value" : "5 Minutes"
+          "Value" : "10 Minutes"
       }, 
       {
           "Key" : "DetailsLink",
-          "Value" : "https://researchgateway.readthedocs.io/en/latest/SecureResearchEnvironment.html"
+          "Value" : "https://researchgateway.readthedocs.io/en/latest/WindowsDesktopForSecureResearch.html"
       }, 
       {
           "Key" : "Service",

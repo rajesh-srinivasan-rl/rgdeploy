@@ -272,6 +272,10 @@ rm -f nextflow-advanced.tar.gz
 tar -czf rstudio.tar.gz RStudio/*
 aws s3 cp ./rstudio.tar.gz s3://"$bucketname/"
 rm -f rstudio.tar.gz
+tar -czf nicedcv.tar.gz Nicedcv/*
+aws s3 cp ./nicedcv.tar.gz s3://"$bucketname/"
+rm -f nicedcv.tar.gz
+
 cp ./PCluster/machine-images/config/infra/files/pcluster/slurm-main.yaml  ./PCluster/machine-images/config/infra/files/pcluster/slurm.yaml
 cp ./PCluster/machine-images/config/infra/files/pcluster/batch-main.yaml  ./PCluster/machine-images/config/infra/files/pcluster/batch.yaml
 sed -i "s/tempbucket/$bucketname/g" ./PCluster/machine-images/config/infra/files/pcluster/slurm.yaml
