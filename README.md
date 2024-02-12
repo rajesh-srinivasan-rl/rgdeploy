@@ -154,15 +154,19 @@ runid.json is created in the rgdeploy folder when you first run deploy.sh with p
 
 ### Updating the AMI list for AMI based products
 
-The deployment creates EC2 Image Builder pipelines for building the RStudio and Nextflow AMIs that are used within Research Gateway. By default, these pipelines are set up to be manually triggered. You can change that in the AWS console if you wish to  trigger them on a schedule.
+Download CFT template (dcvpipeline.yml) from rgrepo and update Master-AMI id with deployed region AMI-ID and RUN CFT by passing bucket name as deployed S3 RG template bucket. 
 
-steps to run pipelines: AWS Console - EC2Imagebuilder – select image pipelines (Rstudio, Nextflow)-click on Actions- Run pipeline
+The deployment creates EC2 Image Builder pipelines for building the RStudio PCluster  Nextflow and DCV based AMIs that are used within Research Gateway. By default, these pipelines are set up to be manually triggered. You can change that in the AWS console if you wish to  trigger them on a schedule.
+
+steps to run pipelines: AWS Console - EC2Imagebuilder – select image pipelines (Rstudio Nextflow PCluster NICE-DCV)-click on Actions- Run pipeline
 
 Once a build is completed, the AMIs are automatically distributed to the regions supported by Research Gateway in your account. The AMI Ids need to be updated into your database before creating any projects. 
 
-- Note down the names of the two pipelines created for RStudio and Nextflow_Advanced. They will be of the format:
+- Note down the names of the four pipelines created for RStudio Nextflow_Advanced PCluster NICE-DCV. They will be of the format:
 RG-PortalStack-ImageBuilder-$runid-Pipeline_RStudio
 RG-PortalStack-ImageBuilder-$runid-Pipeline_Nextflow_Advanced.
+RG-PortalStack-ImageBuilder-$runid-Pipeline_PCluster
+RL_RG_Nicedcv
 The runid will be the random 4-character string generated for your instance during deployment. All the stacks created in your deployment should have that as a suffix.
 - In the rgdeploy folder, cd to products folder. You will find an img-builder-config.json file there. Edit it and set the pipeline names according to the ones deployed in your account. Save the file.
 - Run the script make-amilist.sh. You may have to run chmod +x make-amilist.sh if execute permissions are not set on the file.
