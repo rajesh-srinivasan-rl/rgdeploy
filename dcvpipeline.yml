@@ -10,6 +10,7 @@ Parameters:
   MasterAMI:
     Type: AWS::EC2::Image::Id
     Default: "ami-0a2e6b088850ac621" 
+  #AMI Name : DCV-AmazonLinux2-x86_64-2022.2.14521-NVIDIA-525.85.05-2023-02-16T12-18-39.181Z
   Ver:
     Type: String
     Default: "1.0.0"
