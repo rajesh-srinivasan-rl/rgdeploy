@@ -6,7 +6,7 @@
     "awsRegion": "",
     "RG_HOME": "/opt/deploy/sp2",
     "RG_SRC": "/home/ubuntu",
-    "amiName": "RG-AMI-1.18.0"
+    "amiName": "RG-AMI-1.21.0"
   },
   "builders": [
     {
@@ -93,7 +93,6 @@
     },
     {
       "type": "shell",
-      "environment_vars": ["MONGO_VERSION=3.6","MONGO_Full_VERSION=23"],
       "script": "./provisioners/provision-mongo.sh",
       "pause_before": "10s"
     },

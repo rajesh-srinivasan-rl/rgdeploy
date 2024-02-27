@@ -78,7 +78,7 @@ Fore more details on requesting a certificate, follow this [link](https://docs.a
 
 *10.Set up Route 53 for your domain/sub-domain*
 
-From the AWS Console, select Route 53 service. Create a hosted zone for your domain. If you are using an existing domain you can add a CNAME record and select the public DNS name of the ALB as the value. It is also possible to create a separate hosted zone for the sub-domain used for Research Gateway.
+From the AWS Console, select Route 53 service. [Create a hosted zone for your domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingNewSubdomain.html). If you are using an existing domain you can add a CNAME record and select the public DNS name of the ALB as the value. It is also possible to create a separate hosted zone for the sub-domain used for Research Gateway.
 
 *Note* - It is possible to use Research Gateway without a domain-name but we do not recommend that for product workloads. To do so, use the public DNS name of the ALB as the URL of the Research Gateway in the setup scripts.
 
@@ -154,15 +154,19 @@ runid.json is created in the rgdeploy folder when you first run deploy.sh with p
 
 ### Updating the AMI list for AMI based products
 
-The deployment creates EC2 Image Builder pipelines for building the RStudio and Nextflow AMIs that are used within Research Gateway. By default, these pipelines are set up to be manually triggered. You can change that in the AWS console if you wish to  trigger them on a schedule.
+Download CFT template (dcvpipeline.yml) from rgrepo and update Master-AMI id with deployed region AMI-ID and RUN CFT by passing bucket name as deployed S3 RG template bucket. 
 
-steps to run pipelines: AWS Console - EC2Imagebuilder – select image pipelines (Rstudio, Nextflow)-click on Actions- Run pipeline
+The deployment creates EC2 Image Builder pipelines for building the RStudio PCluster  Nextflow and DCV based AMIs that are used within Research Gateway. By default, these pipelines are set up to be manually triggered. You can change that in the AWS console if you wish to  trigger them on a schedule.
+
+steps to run pipelines: AWS Console - EC2Imagebuilder – select image pipelines (Rstudio Nextflow PCluster NICE-DCV)-click on Actions- Run pipeline
 
 Once a build is completed, the AMIs are automatically distributed to the regions supported by Research Gateway in your account. The AMI Ids need to be updated into your database before creating any projects. 
 
-- Note down the names of the two pipelines created for RStudio and Nextflow_Advanced. They will be of the format:
+- Note down the names of the four pipelines created for RStudio Nextflow_Advanced PCluster NICE-DCV. They will be of the format:
 RG-PortalStack-ImageBuilder-$runid-Pipeline_RStudio
 RG-PortalStack-ImageBuilder-$runid-Pipeline_Nextflow_Advanced.
+RG-PortalStack-ImageBuilder-$runid-Pipeline_PCluster
+RL_RG_Nicedcv
 The runid will be the random 4-character string generated for your instance during deployment. All the stacks created in your deployment should have that as a suffix.
 - In the rgdeploy folder, cd to products folder. You will find an img-builder-config.json file there. Edit it and set the pipeline names according to the ones deployed in your account. Save the file.
 - Run the script make-amilist.sh. You may have to run chmod +x make-amilist.sh if execute permissions are not set on the file.

@@ -20,11 +20,15 @@ Parameters:
     Description: >-
       An S3 URI (starting with "s3://") that specifies the location of files to be copied to
       the environment instance, including any bootstrap scripts
+  EBSVolumeSize:
+    Description: The initial size of the volume (in GBs)  EBS will use for storage.
+    Type: Number
+    Default: 8     
   InstanceType:
-    Description: Choose the instance type for this instance. e.g. t3.small
+    Description: Choose the instance type e.g t3.small (2vCPU , 2GiB RAM) t3.medium (2vCPU , 4GiB RAM), t3.large (2vCPU, 8GiB RAM).
     Type: String
     Default: t3.small
-    AllowedValues: [t3.nano, t3.micro, t3.small, t3.medium]
+    AllowedValues: [t3.small, t3.medium, t3.large]
     ConstraintDescription: must be a valid EC2 instance type.
   KeyPair:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance. If no key pairs exist, please create one from the button next to the dropdown. Please contact your Administrator if you are unable to create one.
@@ -108,7 +112,8 @@ Resources:
           # Install Mysql Shell
           sudo yum install mysql -y
           # Pull Mysql Image
-          docker pull mysql:8
+          #docker pull mysql:8
+          docker pull mariadb:latest
           mkdir docker
           mkdir docker/mysql
           mkdir docker/mysql/conf
@@ -118,7 +123,7 @@ Resources:
           -v /home/ec2-user/docker/mysql/data/:/var/lib/mysql \
           -e MYSQL_ROOT_PASSWORD=${MasterPassword} \
           --restart always \
-          --name docker_mysql mysql:8 \
+          --name docker_mysql mariadb:latest \
           # Download and execute shell script
           cd /home/ec2-user
           aws s3 cp "${EnvironmentInstanceFiles}/alter_rootpassword.sh" "alter_rootpassword.sh"
@@ -138,6 +143,11 @@ Resources:
       ImageId: !Ref 'LatestAmiId'
       IamInstanceProfile: !Ref InstanceProfile
       PropagateTagsToVolumeOnCreation: true
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref EBSVolumeSize
+            Encrypted: true
       Tags:
         - Key: Name
           Value: !Join ['-', [Ref: Namespace, 'ec2-linux']]
