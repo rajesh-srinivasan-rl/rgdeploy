@@ -1,31 +1,24 @@
-var aws = require("aws-sdk");
-var ses = new aws.SES();
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+const ses = new SESClient({ region: "us-east-2" });
 
-exports.handler = (event, context, callback) => {
-  // let adminmail = `Dear ${event.request.userAttributes.given_name},
-  //   <br>
-  //   <br><br>Your singup process is complete, you can now login to portal using below link.
-  //   <br>Your username is ${event.request.userAttributes.given_name}
-  //   <br>${process.env.PORTAL_LINK}/login
-  //   <br><br>You may also copy and paste the link into your browser to login
-  //   <br><br>Thank you,
-  //   <br><br>RLCatalyst Research Portal Team`
-
-  // Identify why was this function invoked
-  if ("custom:created_by" in event.request.userAttributes) {
-    let body = `Your Research Gateway account username is ${event.userName}`;
-    sendEmail(event.request.userAttributes.email, body, function (status) {
-      // Return to Amazon Cognito
-      callback(null, event);
-    });
-  } else {
+export const handler = async (event) => {
+  try {
+    // Identify why this function was invoked
+    if ("custom:created_by" in event.request.userAttributes) {
+      let body = `Your Research Gateway account username is ${event.userName}`;
+      await sendEmail(event.request.userAttributes.email, body);
+    }
     // Return to Amazon Cognito
-    callback(null, event);
+    return event;
+  } catch (error) {
+    console.error("Error:", error);
+    // Return to Amazon Cognito with error
+    return event;
   }
 };
 
-function sendEmail(to, body, completedCallback) {
-  var eParams = {
+async function sendEmail(to, body) {
+  const eParams = {
     Destination: {
       ToAddresses: [to],
     },
@@ -39,18 +32,15 @@ function sendEmail(to, body, completedCallback) {
         Data: "Research Gateway account verification successful",
       },
     },
-
     // Replace source_email with your SES validated email address
     Source: "rlc.support@relevancelab.com",
   };
 
-  var email = ses.sendEmail(eParams, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("===EMAIL SENT===");
-    }
-    completedCallback("Email sent");
-  });
-  console.log("EMAIL CODE END");
+  try {
+    const command = new SendEmailCommand(eParams);
+    const response = await ses.send(command);
+    console.log("Email sent:", response);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 }

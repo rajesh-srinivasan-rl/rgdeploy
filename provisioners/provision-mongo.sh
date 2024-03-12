@@ -1,9 +1,11 @@
 #!/bin/bash
-sudo wget -qO - https://www.mongodb.org/static/pgp/server-${MONGO_VERSION}.asc | sudo apt-key add -
-sudo echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/${MONGO_VERSION} multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-${MONGO_VERSION}.list
-sudo apt-get update -y
-sudo apt-get install -y mongodb-org
-sudo apt-get install -y mongodb-org=${MONGO_VERSION}.${MONGO_Full_VERSION} mongodb-org-server=${MONGO_VERSION}.${MONGO_Full_VERSION}  mongodb-org-shell=${MONGO_VERSION}.${MONGO_Full_VERSION}  mongodb-org-mongos=${MONGO_VERSION}.${MONGO_Full_VERSION}  mongodb-org-tools=${MONGO_VERSION}.${MONGO_Full_VERSION}
+sudo apt-get install gnupg curl
+curl -fsSL https://pgp.mongodb.com/server-4.4.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-4.4.gpg \
+   --dearmor
+sudo echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-4.4.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org=4.4.26 mongodb-org-server=4.4.26 mongodb-org-shell=4.4.26 mongodb-org-mongos=4.4.26 mongodb-org-tools=4.4.26
 sudo systemctl daemon-reload
 sudo systemctl start mongod
 sudo systemctl stop mongod
