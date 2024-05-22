@@ -120,7 +120,6 @@ Resources:
         Statement:
           - Effect: Allow
             Action:
-              - config:*
               - ec2:DescribeImages
               - ec2:CopyImage
               - ec2:ModifyImageAttribute
@@ -135,10 +134,7 @@ Resources:
               - iam:detachRolePolicy
               - iam:updateAssumeRolePolicy
               - elasticloadbalancing:RegisterTargets
-              - ses:*
-              - sns:*
               - sts:AssumeRole
-              - cloudformation:*
             Resource: "*"
   RGPortalSG:
     Type: AWS::EC2::SecurityGroup
