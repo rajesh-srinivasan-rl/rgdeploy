@@ -123,7 +123,6 @@ Resources:
               - ec2:DescribeImages
               - ec2:CopyImage
               - ec2:ModifyImageAttribute
-              - ec2:ModifyInstanceMetadataOptions
               - ec2:CreateNetworkInterface
               - iam:attachRolePolicy
               - iam:createPolicy
@@ -157,11 +156,22 @@ Resources:
         - Key: Name
           Value:
             Fn::Sub: ${AWS::StackName}-SecurityGroup
+  IMDSv2LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+        LaunchTemplateName: IMDSV2
+        LaunchTemplateData:
+          MetadataOptions:
+            HttpTokens: required
+            HttpPutResponseHopLimit: 2
   RGEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0fb3fe843311c4412
+      ImageId: ami-0503c43f0c897b608
       InstanceType: t3.large
+      LaunchTemplate: 
+          LaunchTemplateName: IMDSV2
+          Version: 1
       Monitoring: "true"
       DisableApiTermination: "false"
       IamInstanceProfile:
