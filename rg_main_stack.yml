@@ -155,13 +155,8 @@ Resources:
         Ref: VPC
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: "80"
-          ToPort: "80"
-          CidrIp:
-            Ref: AccessFromCidr
-        - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+          FromPort: "443"
+          ToPort: "443"
           CidrIp:
             Ref: AccessFromCidr
       Tags:
