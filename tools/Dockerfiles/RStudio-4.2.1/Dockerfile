@@ -6,7 +6,8 @@ LABEL org.opencontainers.image.licenses="GPL-2.0-or-later" \
       org.opencontainers.image.authors="Carl Boettiger <cboettig@ropensci.org>"
 
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
-    libxml2-dev 
+    libxml2-dev \
+    libmysqlclient-dev  
 RUN R -e "install.packages(c('tidyverse', 'ggrepel', 'devtools', 'kableExtra', 'survminer', 'quantreg', 'DescTools', 'optparse'), \
     version = c('1.3.1', '0.9.0', '2.4.3', '1.3.4', '0.4.9', '2.0.1', '0.11.1', '1.9.3'))" 
 

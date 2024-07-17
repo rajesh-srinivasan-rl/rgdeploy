@@ -26,6 +26,7 @@ function apt_install() {
 apt_install \
     ca-certificates \
     lsb-release \
+    libmysqlclient-dev \
     file \
     git \
     libapparmor1 \
